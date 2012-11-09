@@ -9,7 +9,8 @@ function saveOptions() {
     localStorage["owa"] = document.getElementById("owa").checked;
     localStorage["owaUrl"] = document.getElementById("owaUrl").value;
     localStorage["default"] = document.getElementById("default").value;
-    document.getElementById("output").innerHTML = "Saved! Please close and re-open Chrome to apply changes.";
+    document.getElementById("output").innerHTML = "Saved!";
+    chrome.extension.getBackgroundPage().window.location.reload();
 }
 // Restores page elements state to saved value from localStorage.
 function restoreOptions() {
