@@ -7,6 +7,10 @@ var lMailUrl = "http://mail.live.com/?rru=compose&to=";
 var owaHTTP = localStorage["owaUrl"];
 var owaUrl = "https://"+owaHTTP+"/owa/?ae=Item&a=New&t=IPM.Note&to=";
 var subject = "&subject=";
+var gmail;
+var yahoo;
+var owa;
+var live;
 
 //Context menu entry for Gmail fires this block
 function clickHandleGmail(){
@@ -47,7 +51,9 @@ function clickHandleOWA() {
         window.open(link);
     }
 }
+// remove pre-existing context menu items
 
+chrome.contextMenus.removeAll()
 
 
 // create the context menu items
@@ -56,31 +62,35 @@ if (localStorage["gmail"] != "false") {
     chrome.contextMenus.create({
         "title" : "Send via Gmail",
         "contexts" :["link"],
-        "onclick" : clickHandleGmail()
-        });
-    };
+        "onclick" : clickHandleGmail(),
+        "id": "gmail"
+   });
+}
 
 
-    if (localStorage["yahoo"] != "false") {
-            chrome.contextMenus.create({
-                    "title" : "Send via Yahoo!",
-                    "contexts" : ["link"],
-                    "onclick" : clickHandleYmail()
-            });
-    };
+if (localStorage["yahoo"] != "false") {
+    chrome.contextMenus.create({
+        "title" : "Send via Yahoo!",
+        "contexts" : ["link"],
+        "onclick" : clickHandleYmail(),
+        "id":"yahoo"
+    });
+}
 
-    if (localStorage["live"] != "false") {
-            chrome.contextMenus.create({
-                    "title" : "Send via Microsoft Live Mail",
-                    "contexts" : ["link"],
-                    "onclick" : clickHandleLmail()
-            });
-    };
+if (localStorage["live"] != "false") {
+    chrome.contextMenus.create({
+        "title" : "Send via Microsoft Live Mail",
+        "contexts" : ["link"],
+        "onclick" : clickHandleLmail(),
+        "id":"live"
+    });
+}
 
-if (localStorage["owa"] != "false") {
-			chrome.contextMenus.create({
-			"title" : "Send via OWA",
-			"contexts" : ["link"],
-			"onclick" : clickHandleOWA()
-		});
-	};
+if (localStorage.owa != "false") {
+    chrome.contextMenus.create({
+        "title" : "Send via OWA",
+        "contexts" : ["link"],
+        "onclick" : clickHandleOWA(),
+        "id":"owa"
+    });
+}
